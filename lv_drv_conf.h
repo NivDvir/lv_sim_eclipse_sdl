@@ -98,7 +98,13 @@
 #  define MONITOR_DOUBLE_BUFFERED 0
 
 /*Eclipse: <SDL2/SDL.h>    Visual Studio: <SDL.h>*/
+#ifdef APP_DEBUG
 #  define MONITOR_SDL_INCLUDE_PATH    <SDL2/SDL.h>
+#else
+#  define MONITOR_SDL_INCLUDE_PATH    <stdio.h>
+// Stubs for SDL2 (doesn't exists under mgbox target
+#	include "sdl-stubs.h"
+#endif
 
 /*Different rendering might be used if running in a Virtual machine*/
 #  define MONITOR_VIRTUAL_MACHINE 0
@@ -219,7 +225,7 @@
  *  Linux frame buffer device (/dev/fbx)
  *-----------------------------------------*/
 #ifndef USE_FBDEV
-#  define USE_FBDEV           0
+#  define USE_FBDEV           1
 #endif
 
 #if USE_FBDEV
@@ -297,7 +303,7 @@
  * Mousewheel as encoder on PC (using SDL)
  *------------------------------------------*/
 #ifndef USE_MOUSEWHEEL
-#  define USE_MOUSEWHEEL      1
+#  define USE_MOUSEWHEEL      0
 #endif
 
 #if USE_MOUSEWHEEL
@@ -312,14 +318,14 @@
 #endif
 
 #if USE_LIBINPUT
-#  define LIBINPUT_NAME   "/dev/input/event0"        /*You can use the "evtest" Linux tool to get the list of devices and test them*/
+#  define LIBINPUT_NAME   "/dev/input/event1"        /*You can use the "evtest" Linux tool to get the list of devices and test them*/
 #endif  /*USE_LIBINPUT*/
 
 /*-------------------------------------------------
  * Mouse or touchpad as evdev interface (for Linux based systems)
  *------------------------------------------------*/
 #ifndef USE_EVDEV
-#  define USE_EVDEV           0
+#  define USE_EVDEV           1
 #endif
 
 #ifndef USE_BSD_EVDEV
@@ -327,7 +333,7 @@
 #endif
 
 #if USE_EVDEV
-#  define EVDEV_NAME   "/dev/input/event0"        /*You can use the "evtest" Linux tool to get the list of devices and test them*/
+#  define EVDEV_NAME   "/dev/input/event1"        /*You can use the "evtest" Linux tool to get the list of devices and test them*/
 #  define EVDEV_SWAP_AXES         0               /*Swap the x and y axes of the touchscreen*/
 
 #  define EVDEV_SCALE             0               /* Scale input, e.g. if touchscreen resolution does not match display resolution */
@@ -349,7 +355,7 @@
  *   Keyboard of a PC (using SDL)
  *------------------------------*/
 #ifndef USE_KEYBOARD
-#  define USE_KEYBOARD        1
+#  define USE_KEYBOARD        0
 #endif
 
 #if USE_KEYBOARD

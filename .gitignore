@@ -1,3 +1,4 @@
+build/
 Debug/
 .settings/
 lv_dev_tools/
@@ -6,3 +7,4 @@ demo
 .pydevproject
 /.metadata/
 /.tracecompass
+/Release/
